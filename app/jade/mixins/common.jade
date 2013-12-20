@@ -1,0 +1,70 @@
+//
+   User: luckystar
+   Date: 13-9-15
+   Time: 上午11:32
+mixin css(href)
+    link(href="#{href}", rel='stylesheet')
+
+mixin js(src)
+    // build:js scripts/modules.js
+
+
+mixin alertError(msg)
+    if msg
+        .container.alert-error #{msg}
+
+mixin header(user)
+    nav.navbar.navbar-default(role="navigation")
+        .navbar-header
+            if user
+                a.navbar-brand(href="/") #{user}, 您好!
+        .pull-right
+            a(href="/")首页
+            &nbsp;
+            if user
+                a(href="/login_out")退出
+            else
+                a(href="/login")登录
+                &nbsp;
+                a(href="/register")注册
+
+mixin showHistory(history)
+    .container.span4
+        .container.lead 打包历史记录：
+            .container
+                if history && history.length > 0
+                    for item in history
+                        if item.templateName
+                            .container
+                                a(href="/build/#{item._id}") #{item.templateName}
+                else
+                    .container 暂无历史记录
+
+mixin showBuildForm(build, deveploper_inner)
+    _id = build._id ? build._id :""
+    +form("/builder-custom/"+ _id)(id="buildForm")
+        +radios("平台","platform",["android","ios", "wp8"],"", build.platform)
+        if deveploper_inner
+            +radios("引擎类型", "engineName", build.engines, "", build.engineName)
+            +input("text","引擎build号","build")(value="#{build.build}")
+        +input("text","客户端名称","clientName")(required, value="#{build.clientName}")
+        +input("text","客户端ID","clientId")(required, value="#{build.clientId}")
+        +input("text","客户端版本","clientVersion")(required, value="#{build.clientVersion}")
+        +radios("横竖屏","orientation",["横屏","竖屏"],"", build.orientation)
+        +checkboxes("自动转屏","autoRotatable",["自动转屏"])
+        +checkboxes("全屏显示","fullShowed",["全屏显示"])
+        +input("text","portal","webApp","zip包")(required, resource="tag", value= build.resources.webApp && build.resources.webApp.name? "#{build.resources.webApp.name}":"")
+        +input("text","预安装app","preInstallApp","zip包")(resource="tag",value= build.resources.preInstallApp &&build.resources.preInstallApp.name ? "#{build.resources.preInstallApp.name}" : "")
+        +input("text","icon","icon","png/jpg")(resource="tag", value=build.resources.icon && build.resources.icon.name ? "#{build.resources.icon.name}" :  "")
+        +input("text","splash","splash","png/jpg")(resource="tag",value=build.resources.splash &&build.resources.splash.name ? "#{build.resources.splash.name}" :  "")
+        //+input("text","https证书","httpsCertificate")(resource="tag",value=build.resources.httpsCertificate && build.resources.httpsCertificate.name ? "#{build.resources.httpsCertificate.name}" :  "")
+        //+input("text","https证书密码","httpsPassword")(value=build.httpsPassword ? "#{build.httpsPassword}" : "")
+        +input("text", "安装包名称","packageName")(value="#{build.packageName}")
+        if build.platform == 'ios'
+            +input("text","app 证书","provisioningProfile")(resource="tag",value=build.resources.provisioningProfile && build.resources.provisioningProfile.name ? "#{build.resources.provisioningProfile.name}" :  "")
+            +input("text","profile文件","certificate")(resource="tag",value=build.resources.certificate && build.resources.certificate.name ? "#{build.resources.certificate.name}" :  "")
+            +input("text","证书密码","certificatePassword")(value=build.certificatePassword ? "#{build.certificatePassword}" : "")
+        +input("email","Email","email")(required)(value=build.email ? "#{build.email}" : "")
+        +checkboxes("插件","plugins", build.plugins, "", "*")
+        +checkboxes("保存构建环境为模板","templateName",["模板名"])
+        +button("submit", "构建")(id="submit")

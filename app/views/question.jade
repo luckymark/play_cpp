@@ -1,0 +1,10 @@
+include ../jade/mixins/form-helper
+
+.question(ng-controller="QuestionCtrl")
+    .question-content {{question.content}}
+    ul.question-choices(ng-repeat="answer in question.answers")
+        li {{answer}}
+
+
+
+

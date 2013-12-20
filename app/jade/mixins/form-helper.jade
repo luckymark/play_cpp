@@ -1,0 +1,52 @@
+//
+   User: luckystar
+   Date: 13-9-15
+   Time: 上午11:26
+
+//example: +form("/myform")
+mixin form(action)
+    form.form-horizontal.well(role="form11",action="#{action}",method="POST",enctype="multipart/form-data", attributes)
+        fieldset
+            block
+
+//example: +checkboxes("平台","platform",["android","ios","win"])
+mixin checkboxes(label,name,values,tips, defaultValue)
+    +_field(label,tips)
+        for  value in values
+            label.checkbox-inline
+                if defaultValue == value || defaultValue == "*"
+                    input(type="checkbox", name="#{name}", checked="checked", value="#{value}")
+                else
+                    input(type="checkbox", name="#{name}",value="#{value}")
+                | #{value}
+
+
+//example: +radios("横竖屏", "orientation",["横屏", "竖屏"], "tips", defaultValue)
+mixin radios(label, name, values, tips, defaultValue)
+    +_field(label, tips)
+        for value in values
+            label.radio-inline
+                if defaultValue == value
+                    input(type="radio", name="#{name}", checked="checked", value="#{value}")
+                else
+                    input(type="radio", name="#{name}", value="#{value}")
+                | #{value}
+
+//example: +input("text","客户端名称","name","默认xFace")
+mixin input(type,label,name,tips)
+    +_field(label,tips)
+        input.form-control.input-xlarge(type="#{type}",name="#{name}",attributes)
+
+//submit()
+mixin button(type, value)
+    +_field()
+        .container
+            button.btn.btn-default(type="#{type}", attributes) #{value}
+
+// private mixins
+mixin _field(label,tips)
+    .form-group
+        label.col-md-2.control-label #{label}
+        .col-md-10
+            block
+        .col-md-2 #{tips}
