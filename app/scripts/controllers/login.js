@@ -7,7 +7,7 @@ angular.module('playCppApp')
         $scope.open = function () {
 
             var modalInstance = $modal.open({
-                templateUrl: 'myModalContent.html',
+                templateUrl: 'views/login.html',
                 controller: ModalInstanceCtrl,
                 resolve: {
                     items: function () {

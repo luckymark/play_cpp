@@ -1,0 +1,20 @@
+<!--
+<User>
+  <luckystar></luckystar>
+</User>
+<Date>
+  <13-12-24></13-12-24>
+</Date>
+<Time>下午5:28</Time>-->
+<div class="modal-header">
+  <h3>I'm a modal!</h3>
+</div>
+<div class="modal-body">
+  <ul>
+    <li ng-repeat="item in items"><a ng-click="selected.item = item">{{ item }}</a></li>
+  </ul>Selected:<b>{{ selected.item }}</b>
+</div>
+<div class="modal-footer">
+  <button ng-click="ok()" class="btn btn-primary">OK</button>
+  <button ng-click="cancel()" class="btn btn-warning">Cancel</button>
+</div>
