@@ -6,15 +6,26 @@
   <13-12-24></13-12-24>
 </Date>
 <Time>下午5:28</Time>-->
-<div class="modal-header">
-  <h3>I'm a modal!</h3>
-</div>
-<div class="modal-body">
-  <ul>
-    <li ng-repeat="item in items"><a ng-click="selected.item = item">{{ item }}</a></li>
-  </ul>Selected:<b>{{ selected.item }}</b>
-</div>
-<div class="modal-footer">
-  <button ng-click="ok()" class="btn btn-primary">OK</button>
-  <button ng-click="cancel()" class="btn btn-warning">Cancel</button>
-</div>
+<form name="loginForm" novalidate="novalidate" class="form-horizontal">
+  <div class="modal-header">
+    <h3>请登录!</h3>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="username" class="col-sm-2">用 户 名</label>
+      <div class="col-sm-9">
+        <input name="name" ng-model="user.name" required="required" class="form-control"/>
+      </div><span ng-class="{valid:loginForm.name.$valid,invalid:!(loginForm.name.$valid)}" class="col-sm-1">&#10004;</span>
+    </div>
+    <div class="form-group">
+      <label for="password" class="col-sm-2">密    码</label>
+      <div class="col-sm-9">
+        <input name="password" ng-model="user.password" required="required" class="form-control"/>
+      </div><span ng-class="{valid:loginForm.password.$valid,invalid:!(loginForm.password.$valid)}" class="col-sm-1">&#10004;</span>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button ng-disabled="!loginForm.$valid" ng-click="ok()" class="btn btn-primary">OK</button>
+    <button ng-click="cancel()" class="btn btn-warning">Cancel</button>
+  </div>
+</form>

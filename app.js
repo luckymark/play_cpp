@@ -18,10 +18,20 @@ app.configure(function () {
         secret: setting.cookieSecret
     }))
 
+    app.use(express.logger())
+    app.use(express.bodyParser({
+        "keepExtensions":true,
+        "uploadDir":__dirname + "/uploads"
+    }))
     app.use(expressValidator())
     app.use(require('./utils/request-params-checker'))
 
     require("./routes")(app)
+
+    app.use(function (err, req, res, next) {
+        console.log('app.js/43 err: %s', JSON.stringify(err))
+        res.send(err.statusCode || 500, err.error)
+    })
 })
 
 app.configure("development", function () {

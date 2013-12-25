@@ -1,42 +1,31 @@
 'use strict';
 
 angular.module('playCppApp')
-    .controller('LoginCtrl', function ($scope, $modal, $log) {
-        $scope.items = ['item1', 'item2', 'item3'];
+    .controller('LoginCtrl', ['$scope', '$modalInstance', '$http', '$cookies', function ($scope, $modalInstance, $http, $cookies) {
 
-        $scope.open = function () {
+        $scope.user = {
+            name: "",
+            password: ""
+        }
 
-            var modalInstance = $modal.open({
-                templateUrl: 'views/login.html',
-                controller: ModalInstanceCtrl,
-                resolve: {
-                    items: function () {
-                        return $scope.items;
+        $scope.ok = function () {
+            $http.post('/userlogin', $scope.user)
+                .success(function (data, status) {
+                    if (data && typeof data === "object") {
+                        $cookies.username = data.name
+                        $cookies.userid = data._id
+                        $modalInstance.close()
+                    } else {
+                        alert('login failed!')
                     }
-                }
-            });
+                })
+                .error(function (data, status) {
+                    alert('login failed!')
+                    console.log(data)
+                })
+        }
 
-            modalInstance.result.then(function (selectedItem) {
-                $scope.selected = selectedItem;
-            }, function (err) {
-                $log.info(err+'Modal dismissed at: ' + new Date());
-            });
-        };
-    });
-
-
-var ModalInstanceCtrl = function ($scope, $modalInstance, items) {
-
-    $scope.items = items;
-    $scope.selected = {
-        item: $scope.items[0]
-    };
-
-    $scope.ok = function () {
-        $modalInstance.close($scope.selected.item);
-    };
-
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
-};
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel')
+        }
+    }])
