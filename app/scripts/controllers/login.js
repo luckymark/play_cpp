@@ -9,7 +9,7 @@ angular.module('playCppApp')
         }
 
         $scope.ok = function () {
-            $http.post('/userlogin', $scope.user)
+            $http.post('/rest/some', $scope.user)
                 .success(function (data, status) {
                     if (data && typeof data === "object") {
                         $cookies.username = data.name

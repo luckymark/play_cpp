@@ -18,8 +18,39 @@ module.exports = function (app) {
 
     app.get('/rest/:collection/:id', function (req, res, fail) {
         Any.get(req.params.collection,req.params.id)
-            .then(function (enty) {
-                res.send(enty)
+            .then(function (entity) {
+                res.send(entity)
+            }, function (err) {
+                fail(err)
+            })
+    })
+
+    app.post('/rest/:collection', function (req, res, fail) {
+        Any.create(req.params.collection,req.body)
+            .then(function (entity) {
+                res.send(entity)
+            }, function (err) {
+                fail(err)
+            })
+    })
+
+    app.put('/rest/:collection/:id', function (req, res, fail) {
+        Any.update(req.params.collection,req.params.id,req.body)
+            .then(function (entity) {
+                res.send(entity)
+            }, function (err) {
+                fail(err)
+            })
+    })
+
+    app.del('/rest/:collection/:id', function (req, res, fail) {
+        Any.remove(req.params.collection,req.params.id)
+            .then(function (total) {
+                if (total==1){
+                    res.send('ok')
+                }else{
+                    fail({error:{msg:'资源不存在'}})
+                }
             }, function (err) {
                 fail(err)
             })

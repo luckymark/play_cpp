@@ -25,7 +25,6 @@ angular.module('playCppApp')
 
         $scope.select =function(answer){
             alert(answer)
-            //alert($scope.question.answers[answer].isRight)
         }
 
     }])
