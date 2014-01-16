@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('playCppApp')
-    .controller('LoginCtrl', ['$scope', '$modalInstance', '$http', '$cookies', function ($scope, $modalInstance, $http, $cookies) {
+    .controller('LoginCtrl', ['$scope', '$http',  function ($scope,  $http) {
 
         $scope.user = {
             name: "",
@@ -23,9 +23,5 @@ angular.module('playCppApp')
                     alert('login failed!')
                     console.log(data)
                 })
-        }
-
-        $scope.cancel = function () {
-            $modalInstance.dismiss('cancel')
         }
     }])

@@ -1,0 +1,10 @@
+//
+   User: luckystar
+   Date: 14-1-12
+   Time: 下午12:19
+
+.panel.panel-default(ng-repeat="step in steps",ng-click="select($index)")
+    .panel-heading {{step.title}}
+    .panel-body
+        div {{step.description}}
+
