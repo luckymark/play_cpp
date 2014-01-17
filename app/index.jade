@@ -14,18 +14,18 @@ html.no-js
         +css("styles/main.css")
         // endbuild
 
-    body(ng-app="playCppApp")
+    body(ng-app="playCppApp",ng-controller="MainCtrl")
         .container
             nav.navbar.navbar-default.navbar-fixed-top(role="navigation")
                 .collapse.navbar-collapse
                     ul.nav.nav-tabs
-                        li.active
+                        li(ng-class="{active: isState('steps')}")
                             a(ng-href="#") Home
-                        li
+                        li(ng-class="{active: isState('learning')}")
                             a(ng-href="#/learn") Learn
-                        li
+                        li(ng-class="{active: isState('testing')}")
                             a(ng-href="#/test") Test
-                        li
+                        li(ng-class="{active: isState('logoff')}")
                             a(ng-href="#/login") Login
 
         .container(ui-view="")
@@ -52,5 +52,6 @@ html.no-js
         script(src='scripts/controllers/step.js')
         script(src='scripts/controllers/learn.js')
 
+        script(src='scripts/controllers/main.js')
         // endbuild
 
