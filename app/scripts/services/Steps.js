@@ -7,7 +7,7 @@
 angular.module('playCppApp')
     .factory('Steps', ['$resource', function ($resource) {
         return $resource(
-            '/rest/steps/:id',
+            'api/rest/steps/:id',
             {id: '@_id'}
         )
     }])

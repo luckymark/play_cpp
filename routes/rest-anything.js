@@ -7,7 +7,7 @@
 var Any = require('../model/anything')
 
 module.exports = function (app) {
-    app.get('/rest/:collection', function (req, res, fail) {
+    app.get('/api/rest/:collection', function (req, res, fail) {
         Any.getAll(req.params.collection)
             .then(function (entities) {
                 res.send(entities)
@@ -16,7 +16,7 @@ module.exports = function (app) {
             })
     })
 
-    app.get('/rest/:collection/:id', function (req, res, fail) {
+    app.get('/api/rest/:collection/:id', function (req, res, fail) {
         Any.get(req.params.collection,req.params.id)
             .then(function (entity) {
                 res.send(entity)
@@ -25,7 +25,7 @@ module.exports = function (app) {
             })
     })
 
-    app.post('/rest/:collection', function (req, res, fail) {
+    app.post('/api/rest/:collection', function (req, res, fail) {
         Any.create(req.params.collection,req.body)
             .then(function (entity) {
                 res.send(entity)
@@ -34,7 +34,7 @@ module.exports = function (app) {
             })
     })
 
-    app.put('/rest/:collection/:id', function (req, res, fail) {
+    app.put('/api/rest/:collection/:id', function (req, res, fail) {
         Any.update(req.params.collection,req.params.id,req.body)
             .then(function (entity) {
                 res.send(entity)
@@ -43,7 +43,7 @@ module.exports = function (app) {
             })
     })
 
-    app.del('/rest/:collection/:id', function (req, res, fail) {
+    app.del('/api/rest/:collection/:id', function (req, res, fail) {
         Any.remove(req.params.collection,req.params.id)
             .then(function (total) {
                 if (total==1){

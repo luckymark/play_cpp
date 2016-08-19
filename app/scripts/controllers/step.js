@@ -9,6 +9,7 @@ angular.module('playCppApp')
         Steps.query(function (data) {
             $rootScope.steps = data
             $rootScope.currentStep = data[0]
+            $rootScope.currentQuestionIndex = 0
         })
 
         $scope.select = function (stepIndex) {

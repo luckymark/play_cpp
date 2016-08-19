@@ -1,6 +1,7 @@
-include jade/mixins/common
+include mixins/common
 
-!!! 5
+doctype html
+
 html.no-js
     head
         meta(charset='utf-8')
@@ -10,8 +11,8 @@ html.no-js
         meta(name='viewport', content='width=device-width')
 
         // build:css({.tmp,app}) styles/main.css
-        +css("styles/bootstrap.css")
-        +css("styles/main.css")
+        +css("app/styles/bootstrap.css")
+        +css("app/styles/main.css")
         // endbuild
 
     body(ng-app="playCppApp",ng-controller="MainCtrl")
@@ -30,28 +31,28 @@ html.no-js
 
         .container(ui-view="")
 
-        script(src='bower_components/angular/angular.js')
+        script(src='app/bower_components/angular/angular.js')
 
         // build:js scripts/modules.js
-        script(src='bower_components/angular-ui-router/release/angular-ui-router.min.js')
-        script(src='bower_components/angular-resource/angular-resource.js')
-        script(src='scripts/vendor/ui-bootstrap-tpls-0.7.0.js')
+        script(src='app/bower_components/angular-ui-router/release/angular-ui-router.min.js')
+        script(src='app/bower_components/angular-resource/angular-resource.js')
+        script(src='app/scripts/vendor/ui-bootstrap-tpls-0.7.0.js')
         // endbuild
 
         // build:js({.tmp,app}) scripts/scripts.js
-        script(src='scripts/app.js')
+        script(src='app/scripts/app.js')
 
 
-        script(src='scripts/controllers/Question.js')
-        script(src='scripts/services/Question.js')
+        script(src='app/scripts/controllers/Question.js')
+        script(src='app/scripts/services/Question.js')
 
-        script(src='scripts/services/user.js')
-        script(src='scripts/controllers/login.js')
+        script(src='app/scripts/services/user.js')
+        script(src='app/scripts/controllers/login.js')
 
-        script(src='scripts/services/Steps.js')
-        script(src='scripts/controllers/step.js')
-        script(src='scripts/controllers/learn.js')
+        script(src='app/scripts/services/Steps.js')
+        script(src='app/scripts/controllers/step.js')
+        script(src='app/scripts/controllers/learn.js')
 
-        script(src='scripts/controllers/main.js')
+        script(src='app/scripts/controllers/main.js')
         // endbuild
 

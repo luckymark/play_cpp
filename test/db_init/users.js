@@ -1,6 +1,6 @@
 
 var init = require('./db_init'),
-    ObjectId = init.ObjectID;
+    ObjectId = init.ObjectID
 
 init.collection('users')
     .clear()

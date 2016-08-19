@@ -11,22 +11,22 @@ angular.module('playCppApp', [
         $stateProvider
             .state('logoff', {
                 url: "/login",
-                templateUrl: "views/login.html",
+                templateUrl: "/login",
                 controller: 'LoginCtrl'
             })
             .state('steps', {
                 url: "/",
-                templateUrl: "views/steps.html",
+                templateUrl: "/steps",
                 controller: 'StepsCtrl'
             })
             .state('learning', {
                 url: "/learn",
-                templateUrl: "views/learn.html",
+                templateUrl: "/learn",
                 controller: 'LearnCtrl'
             })
             .state('testing', {
                 url: "/test",
-                templateUrl: "views/question.html",
+                templateUrl: "/question",
                 controller: 'QuestionCtrl'
             })
     })

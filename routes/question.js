@@ -6,7 +6,7 @@
 var Question = require('../model/question')
 
 module.exports = function (app) {
-    app.get('/question', function (req, res, fail) {
+    app.get('/api/question', function (req, res, fail) {
         Question.getAll()
             .then(function (users) {
                 res.send(users)
@@ -15,7 +15,7 @@ module.exports = function (app) {
             })
     })
 
-    app.get('/question/:id', function (req, res, fail) {
+    app.get('/api/question/:id', function (req, res, fail) {
         Question.get(req.params.id)
             .then(function (user) {
                 res.send(user)

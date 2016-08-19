@@ -11,6 +11,9 @@ app.configure(function () {
     app.set('port', process.env.PORT || setting.port)
     app.use(express.logger())
 
+    app.set('views', __dirname + '/views')
+    app.set('view engine', 'jade')
+
     app.use("/app", express["static"](__dirname + "/app"));
 
     app.use(express.cookieParser())

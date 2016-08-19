@@ -1,9 +1,9 @@
-include ../jade/mixins/form-helper
+include mixins/form-helper
 
 .question(ng-controller="QuestionCtrl").well
     .question-content.bottom {{question.content}}
-    ul.question-choices(ng-repeat="answer in question.answers")
-        li.btn.btn-default(ng-click="select($index)") {{answer}}
+    ul.question-choices(ng-repeat="option in question.options")
+        li.btn.btn-default(ng-click="select($index)") {{option}}
     .btn.btn-default(ng-disabled ="isFirst()",ng-click="pre()") 前一个
     .btn.btn-default(ng-disabled ="isLast()",ng-click="next()") 后一个
 

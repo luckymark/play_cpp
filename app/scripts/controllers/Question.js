@@ -1,30 +1,41 @@
 'use strict';
 
 angular.module('playCppApp')
-    .controller('QuestionCtrl', ['$scope', 'Question', function ($scope, Question) {
-        var questions=[]
-            , index = 0;
-        Question.query(function (data) {
-            questions = data
-            $scope.question = questions[index]
-        })
+    .controller('QuestionCtrl', ['$scope', '$rootScope', 'Question', function ($scope, $rootScope, Question) {
+        function load() {
+            Question.get({"id": $rootScope.currentStep.questions[$rootScope.currentQuestionIndex]},
+                function (data) {
+                    $scope.question = data
+                }
+            )
+        }
+
+        load()
 
         $scope.pre = function () {
-            $scope.question = questions[--index]
+            $rootScope.currentQuestionIndex--
+            load()
         }
         $scope.next = function () {
-            $scope.question = questions[++index]
+            $rootScope.currentQuestionIndex++
+            load()
         }
 
         $scope.isFirst = function () {
-            return questions.length==0 || index == 0
+            return $rootScope.currentStep.questions.length == 0 || $rootScope.currentQuestionIndex == 0
         }
         $scope.isLast = function () {
-            return questions.length==0 || (index == (questions.length - 1))
+            var length = $rootScope.currentStep.questions.length
+            return length == 0 || ($rootScope.currentQuestionIndex == (length - 1))
         }
 
-        $scope.select =function(answer){
-            alert(answer)
+        $scope.select = function (answer) {
+            if (answer == $scope.question.answer) {
+                alert("Congratulations!")
+                if (!$scope.isLast())$scope.next()
+            } else {
+                alert("Sorry!")
+            }
         }
 
     }])

@@ -6,7 +6,7 @@
 
 angular.module('playCppApp')
     .factory('User', ['$resource', function($resource) {
-        return $resource('/user/:id',
+        return $resource('api/user/:id',
             {id:'@_id'},
             {
                 'login': { method:'POST',isArray:false }
